@@ -2,19 +2,18 @@ package main
 
 import (
 	"log"
-	"net/http"
+
+	"github.com/gofiber/fiber/v2"
 )
 
-func handler(rw http.ResponseWriter, r *http.Request) {
+func api_handler(c *fiber.Ctx) error {
 	message := "Hello, World!\n"
 	log.Print(message)
-	rw.Write([]byte(message))
+	return c.SendString("Hello, World!")
 }
 
 func main() {
-	http.HandleFunc("/", handler)
-
-	log.Println("Starting Server")
-	err := http.ListenAndServe(":8080", nil)
-	log.Fatal(err)
+	app := fiber.New()
+	app.Get("/", api_handler)
+	app.Listen(":3000")
 }
