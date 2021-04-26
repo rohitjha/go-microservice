@@ -16,5 +16,5 @@ func Setup() *fiber.App {
 
 func main() {
 	app := Setup()
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.ListenTLS(":3001", "certs/localhost.crt", "certs/localhost.key"))
 }
