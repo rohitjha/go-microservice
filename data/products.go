@@ -17,6 +17,27 @@ type Product struct {
 	UpdatedOn   time.Time `json:"-"`
 }
 
+var productList = []*Product{
+	{
+		ID:          uuid.New(),
+		Name:        "Latte",
+		Description: "Frothy milky coffee",
+		Price:       2.45,
+		SKU:         "abc323",
+		CreatedOn:   time.Now().UTC(),
+		UpdatedOn:   time.Now().UTC(),
+	},
+	{
+		ID:          uuid.New(),
+		Name:        "Espresso",
+		Description: "Short and strong coffee without milk",
+		Price:       1.99,
+		SKU:         "fjd34",
+		CreatedOn:   time.Now().UTC(),
+		UpdatedOn:   time.Now().UTC(),
+	},
+}
+
 func ListProducts() []*Product {
 	return productList
 }
@@ -34,11 +55,11 @@ func GetProduct(name string) *Product {
 func AddProduct(product *Product) {
 	product.ID = uuid.New()
 	product.CreatedOn = time.Now().UTC()
+	product.UpdatedOn = time.Now().UTC()
 	productList = append(productList, product)
 }
 
 func UpdateProduct(name string, product *Product) {
-	product.UpdatedOn = time.Now().UTC()
 	for _, p := range productList {
 		if p.Name == name {
 			p.UpdatedOn = time.Now().UTC()
@@ -66,25 +87,4 @@ func DeleteProduct(name string) {
 		}
 	}
 	productList = append(productList[:index], productList[index+1:]...)
-}
-
-var productList = []*Product{
-	{
-		ID:          uuid.New(),
-		Name:        "Latte",
-		Description: "Frothy milky coffee",
-		Price:       2.45,
-		SKU:         "abc323",
-		CreatedOn:   time.Now().UTC(),
-		UpdatedOn:   time.Now().UTC(),
-	},
-	{
-		ID:          uuid.New(),
-		Name:        "Espresso",
-		Description: "Short and strong coffee without milk",
-		Price:       1.99,
-		SKU:         "fjd34",
-		CreatedOn:   time.Now().UTC(),
-		UpdatedOn:   time.Now().UTC(),
-	},
 }
