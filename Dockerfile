@@ -2,7 +2,7 @@ FROM golang
 WORKDIR /app
 COPY . .
 RUN unset GOPATH && \
-    go build -ldflags "-linkmode external -extldflags -static" -a main.go
+    go build -ldflags "-s -w" main.go
 
 FROM scratch
 COPY --from=0 /app/main /main
