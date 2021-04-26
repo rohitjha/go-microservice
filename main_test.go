@@ -2,7 +2,7 @@ package main
 
 import (
 	"io/ioutil"
-	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -47,7 +47,7 @@ func TestIndexRoute(t *testing.T) {
 	for _, test := range tests {
 		// Create a new http request with the route
 		// from the test case
-		req, _ := http.NewRequest(
+		req := httptest.NewRequest(
 			"GET",
 			test.route,
 			nil,
