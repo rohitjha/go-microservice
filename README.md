@@ -21,14 +21,32 @@ docker run -it -p 3001:3001 go-microservice
 
 ## Testing using curl
 
+### List all products
+
 ```bash
 curl -kv https://localhost:3001/products
+```
+
+### Get a product
+
+```bash
 curl -kv https://localhost:3001/products/Latte
+```
+
+### Add a product
+
+```bash
 curl -kv -X PUT https://localhost:3001/products -d '{"name":"Pie","description":"pi","price":3.1415,"sku":"123456"}' -H 'Content-Type: application/json'
-curl -kv https://localhost:3001/products
+```
+
+### Update a product
+
+```bash
 curl -kv -X POST https://localhost:3001/products/Pie -d '{"description":"pie"}' -H 'Content-Type: application/json'
-curl -kv https://localhost:3001/products/Pie
+```
+
+### Delete a product
+
+```bash
 curl -kv -X DELETE https://localhost:3001/products/Pie
-curl -kv https://localhost:3001/products/Pie
-curl -kv https://localhost:3001/products
 ```
