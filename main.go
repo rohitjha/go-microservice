@@ -1,19 +1,13 @@
 package main
 
 import (
-	"log"
+	"github.com/rohitjha/go-microservice/handlers"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-func api_handler(c *fiber.Ctx) error {
-	message := "Hello, World!\n"
-	log.Print(message)
-	return c.SendString("Hello, World!")
-}
-
 func main() {
 	app := fiber.New()
-	app.Get("/", api_handler)
+	app.Get("/", handlers.APIHandler)
 	app.Listen(":3000")
 }

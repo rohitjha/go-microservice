@@ -1,4 +1,4 @@
-module github.com/rjha-gd/go-fiber-microservice
+module github.com/rohitjha/go-microservice
 
 go 1.16
 
