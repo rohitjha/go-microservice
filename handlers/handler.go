@@ -7,8 +7,10 @@ import (
 )
 
 func APIHandler(c *fiber.Ctx) error {
-	message := "Hello, World!\n"
+	status := fiber.StatusOK
+	message := "Hello, World!"
 	log.Print(message)
-	c.SendString("Hello, World!")
+	c.Status(status)
+	c.JSON(fiber.Map{"status": status, "message": message, "data": nil})
 	return nil
 }
