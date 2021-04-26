@@ -35,6 +35,22 @@ func TestIndexRoute(t *testing.T) {
 			expectedBody:  `[{"name":"Latte","description":"Frothy milky coffee","price":2.45,"sku":"abc323"},{"name":"Espresso","description":"Short and strong coffee without milk","price":1.99,"sku":"fjd34"}]`,
 		},
 		{
+			description:   "get a product",
+			method:        "GET",
+			route:         "/products/Latte",
+			expectedError: false,
+			expectedCode:  200,
+			expectedBody:  `{"name":"Latte","description":"Frothy milky coffee","price":2.45,"sku":"abc323"}`,
+		},
+		{
+			description:   "not get a non-existent product",
+			method:        "GET",
+			route:         "/products/Pizza",
+			expectedError: false,
+			expectedCode:  404,
+			expectedBody:  "",
+		},
+		{
 			description:   "put a product",
 			method:        "PUT",
 			route:         "/products",

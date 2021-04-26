@@ -17,8 +17,18 @@ type Product struct {
 	UpdatedOn   time.Time `json:"-"`
 }
 
-func GetProducts() []*Product {
+func ListProducts() []*Product {
 	return productList
+}
+
+func GetProduct(name string) *Product {
+	for _, p := range productList {
+		if p.Name == name {
+			return p
+		}
+	}
+
+	return nil
 }
 
 func AddProduct(product *Product) {

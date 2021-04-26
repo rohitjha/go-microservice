@@ -7,11 +7,27 @@ import (
 	"github.com/rohitjha/go-microservice/data"
 )
 
-func GetProducts(c *fiber.Ctx) error {
+func ListProducts(c *fiber.Ctx) error {
 	log.Print("Getting all products")
-	products := data.GetProducts()
+	products := data.ListProducts()
 	c.Status(fiber.StatusOK)
 	c.JSON(products)
+	return nil
+}
+
+func GetProduct(c *fiber.Ctx) error {
+	name := c.Params("name")
+	log.Printf("Getting product %v", name)
+	product := data.GetProduct(name)
+
+	if product == nil {
+		log.Printf("Did not find any product with name %v", name)
+		c.Status(fiber.StatusNotFound)
+		return nil
+	}
+
+	c.Status(fiber.StatusOK)
+	c.JSON(product)
 	return nil
 }
 
