@@ -10,7 +10,10 @@ import (
 
 func Setup() *fiber.App {
 	app := fiber.New()
-	app.Get("/", handlers.APIHandler)
+	app.Get("/products", handlers.GetProducts)
+	app.Put("/products", handlers.AddProduct)
+	app.Post("/products/:name", handlers.UpdateProduct)
+	app.Delete("/products/:name", handlers.DeleteProduct)
 	return app
 }
 
