@@ -10,4 +10,5 @@ WORKDIR /app
 COPY --from=0 /build/main /app/main
 COPY --from=0 /build/app.env /app/app.env
 COPY --from=0 /build/certs /app/certs
+USER 2000
 CMD ["/app/main"]
