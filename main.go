@@ -28,7 +28,6 @@ func main() {
 		log.Fatal("Cannot load config:", err)
 	}
 
-	// log.Fatal(app.ListenTLS(":3001", "certs/localhost.crt", "certs/localhost.key"))
 	log.Fatal(
 		app.ListenTLS(
 			fmt.Sprintf(":%v", config.Port),
