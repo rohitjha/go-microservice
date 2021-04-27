@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
+	"github.com/rohitjha/go-microservice/config"
 	"github.com/rohitjha/go-microservice/handlers"
 
 	"github.com/gofiber/fiber/v2"
@@ -20,5 +22,16 @@ func Setup() *fiber.App {
 
 func main() {
 	app := Setup()
-	log.Fatal(app.ListenTLS(":3001", "certs/localhost.crt", "certs/localhost.key"))
+
+	config, err := config.LoadConfig(".")
+	if err != nil {
+		log.Fatal("Cannot load config:", err)
+	}
+
+	// log.Fatal(app.ListenTLS(":3001", "certs/localhost.crt", "certs/localhost.key"))
+	log.Fatal(
+		app.ListenTLS(
+			fmt.Sprintf(":%v", config.Port),
+			config.CertFileLocation,
+			config.KeyFileLocation))
 }
